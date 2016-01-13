@@ -33,27 +33,34 @@ module PostUI =
                         button0 "Change" (fun () -> post.IsEditMode.Value <- true ) ] )
 
         let doc'header blog post = 
-            Div[Attr.Class "post-header-block"] [ 
-                Div [ Attr.Class "post-title-text-block"] [ Doc.TextView post.Title.View ]                    
-                doc'crud blog post
-                txt "Num " 
-                Doc'Map post.Num.View <| fun n ->
-                    txt (string n)                        
-                doc'date post ]
+            Div[Attr.Class "panel-heading"] [ Doc.TextView post.Title.View ]  
+                //Div [ Attr.Class "post-title-text-block"] 
+//                [ Doc.TextView post.Title.View ]                    
+//                doc'crud blog post
+//                txt "Num " 
+//                Doc'Map post.Num.View <| fun n ->
+//                    txt (string n)                        
+//                doc'date post ]
 
         let doc'static'content post = 
-            Div0[
-                Doc'Map post.Content.View <| fun content ->
-                    let htmlElem = JQuery.JQuery.Of("<div class=\"post-content-block\">" + content + "</div>").Get(0)
-                    try
-                        Doc.Static (htmlElem :?> _) 
-                    with _ -> txt content ]             
+            Doc'Map post.Content.View <| fun content ->
+                let htmlElem = JQuery.JQuery.Of("<div class=\"panel-body\">" + content + "</div>").Get(0)
+                try
+                    Doc.Static (htmlElem :?> _) 
+                with _ -> txt content
 
-    let doc blog post  =             
-        LI [Attr.Create "id" ( sprintf "post-%d-article" post.Id) ] [
+    let doc blog post  =
+        Div [Attr.Class "panel panel-primary"; Attr.Create "id" ( sprintf "post-%d-article" post.Id)][
             doc'header blog post
-            on'edit post 
+            on'edit post
                 (Div0[  P0[ txt "Title";  Doc.Input [ Attr.Style "width" "100%" ]  post.EditedTitle ]
                         P0[ txt "Content";     doc'edit'content'input'area post.EditedContent] ] )
-                (doc'static'content post)]
+                (doc'static'content post)
+            ]
+//        LI [Attr.Create "id" ( sprintf "post-%d-article" post.Id) ] [
+//            doc'header blog post
+//            on'edit post 
+//                (Div0[  P0[ txt "Title";  Doc.Input [ Attr.Style "width" "100%" ]  post.EditedTitle ]
+//                        P0[ txt "Content";     doc'edit'content'input'area post.EditedContent] ] )
+//                (doc'static'content post)]
         

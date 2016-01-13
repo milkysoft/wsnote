@@ -7,7 +7,14 @@
 
 namespace WsNote
 
+//open WebSharper
+//open WebSharper.UI.Next
+//open WebSharper.UI.Next.Html
+
+
 open WebSharper
+open WebSharper.JavaScript
+open WebSharper.JQuery
 open WebSharper.UI.Next
 open WebSharper.UI.Next.Html
 
@@ -50,7 +57,7 @@ module BlogUI =
             let page'link n = 
                 let is'current = n=nav.PageNum
                 let s = 
-                    if n=0 then "Beginning" 
+                    if n=0 then sprintf "Page %d" (n+1) //"Items" 
                     elif n=lastPageIndex then sprintf "End %d" (n+1)  else 
                     sprintf "Page %d" (n+1)
                 LI0[ Doc.Button s [ if is'current then yield Attr.Class "current-page-button"] <| fun () ->
@@ -91,38 +98,68 @@ module BlogUI =
                 return blog, {PageNum = page'number; PageLen = posts'count; TotlalLen = blog.TotalCount.Value}
                 }  )
 
-        let doc'nav nav = 
-            UL0[ 
+        let doc'nav'left nav =
+                Div [Attr.Class "navbar-collapse collapse"][
+                    UL [Attr.Class "nav navbar-nav sm"][ 
+                                 
+                        yield LI0 [ LoginUI.is'logged'in NewPostUI.button Doc.Empty ]
+                    ]
+                ]
+
+
+        let doc'nav'right nav =
+            UL [Attr.Class "nav navbar-nav sm sm-collapsible"][ 
+                yield LI0[ Doc.Button "Settings" [Attr.Class "mainsettingsbtn"] <| fun () -> var'is'settings'visible.Value <- true ]
                 yield LI0[ LoginUI.button ]
-                yield LI0 [ LoginUI.is'logged'in NewPostUI.button Doc.Empty ]
-                yield! b'nav nav 
-                yield LI0[ button0 "Settings" <| fun () -> var'is'settings'visible.Value <- true ] ]
+            ]
 
 
     // web site entering point
-    let main() =                                 
+    let main() =
+
+        let attr'my1 =  Attr.Create "placeholder" "Search"
+        let attr'my2 = Attr.Class "mainsearch"
+        let attrs = Seq.append [| attr'my1|] [ attr'my2]
+
         // stories page
-        Div0[            
-            Div0[
-                v'blog 
-                |> View.Map( fun (blog,nav) -> Nav0[ doc'nav nav ] )
-                |> Doc.EmbedView
+        Div[Attr.Class "container"][
+            Div [Attr.Class "navbar navbar-default navbar-fixed-top"][
+                Div [Attr.Class "navbar-header"][
+                    v'blog 
+                    |> View.Map( fun (blog,nav) -> Nav0[ doc'nav'left nav ] )
+                    |> Doc.EmbedView
+                ]
+                Div [Attr.Class "navbar-collapse collapse"][
+                    Div [Attr.Class "navbar-collapse collapse"][
+                        Div [Attr.Class "pull-right"][
+                            Div [Attr.Class "nav"][
+                                UL[Attr.Class "nav navbar-nav sm sm-collapsible"][
+                                    LI0[
+                                        Doc.Input attrs var'context                                   
+                                    ]
+                                ]
+
+
+                                var'context.View |> View.Map (fun x -> 
+                                    var'page'number.Value <- "0"
+                                    Doc.Empty)
+                                |> Doc.EmbedView
+
+                                v'blog 
+                                |> View.Map( fun (blog,nav) -> doc'nav'right nav )
+                                |> Doc.EmbedView
                 
-                txt "Search"
-                input0 var'context
-
-                var'context.View |> View.Map (fun x -> 
-                    var'page'number.Value <- "0"
-                    Doc.Empty)
-                |> Doc.EmbedView
-       
-
-                Doc'Map var'is'settings'visible.View <| function 
-                    | true -> doc'settings 
-                    | _ -> Doc.Empty ]
+                                Doc'Map var'is'settings'visible.View <| function 
+                                    | true -> doc'settings 
+                                    | _ -> Doc.Empty
+                            ]
+                        ]
+                    ]
+                ]
+            ]
             |> NewPostUI.on Doc.Empty
 
-            
+
             v'blog  
             |> View.Map ( fun (blog,_) ->
                 let docBlog = 
@@ -130,12 +167,9 @@ module BlogUI =
                     |> Doc.ConvertBy (fun m -> m.Id) (PostUI.doc blog )                
                 NewPostUI.on 
                     ( NewPostUI.doc blog)
-                    ( UL0 [docBlog] )) 
+                    ( UL[Attr.Class "ul-top-blog"] [docBlog] )) 
             |> Doc.EmbedView  
-             
-            
-            
-            ] 
+        ]
              
         |> LoginUI.on'visible LoginUI.doc'logining 
         

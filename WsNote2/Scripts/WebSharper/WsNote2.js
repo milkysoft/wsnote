@@ -1,25 +1,31 @@
 (function()
 {
- var Global=this,Runtime=this.IntelliFactory.Runtime,UI,Next,Html,List,Doc,View,WsNote,BlogUI,_web_application_client_side_core,UINextUtils,NewPostUI,PostUI,ListModel1,LoginUI,Operators,Seq,Attr,String,T,Concurrency,ClientBlogData,Var,_______________________________________________________________________,Control,MailboxProcessor,Remoting,AjaxRemotingProvider,Collections,ResizeArray,ResizeArrayProxy,ListModel,Number,ClientUtils,_private_members,window,PrintfHelpers,console,_private_members1,_private_members2,jQuery,View1;
+ var Global=this,Runtime=this.IntelliFactory.Runtime,UI,Next,Attr,Seq,List,Html,Doc,View,WsNote,BlogUI,_web_application_client_side_core,UINextUtils,NewPostUI,PostUI,ListModel1,LoginUI,Operators,String,T,Concurrency,ClientBlogData,Var,_______________________________________________________________________,Control,MailboxProcessor,Remoting,AjaxRemotingProvider,Collections,ResizeArray,ResizeArrayProxy,ListModel,Number,ClientUtils,_private_members,window,PrintfHelpers,console,_private_members1,_private_members2,jQuery,View1;
  Runtime.Define(Global,{
   WsNote:{
    BlogUI:{
     main:function()
     {
-     var x,x1,f;
+     var _attr_my1,_attr_my2,attrs,x,x1,f;
+     _attr_my1=Attr.Create("placeholder","Search");
+     _attr_my2=Attr.Class("mainsearch");
+     attrs=Seq.append([_attr_my1],List.ofArray([_attr_my2]));
      f=function(_arg1)
      {
       return _arg1?_web_application_client_side_core["doc'settings"]():Doc.get_Empty();
      };
-     x1=Html.Div0(List.ofArray([Doc.EmbedView(View.Map(function(tupledArg)
+     x1=Html.Div(List.ofArray([Attr.Class("navbar navbar-default navbar-fixed-top")]),List.ofArray([Html.Div(List.ofArray([Attr.Class("navbar-header")]),List.ofArray([Doc.EmbedView(View.Map(function(tupledArg)
      {
-      return Html.Nav0(List.ofArray([_web_application_client_side_core["doc'nav"](tupledArg[1])]));
-     },_web_application_client_side_core["v'blog"]())),UINextUtils.txt("Search"),(UINextUtils.input0())(_web_application_client_side_core["var'context"]()),Doc.EmbedView(View.Map(function()
+      return Html.Nav0(List.ofArray([_web_application_client_side_core["doc'nav'left"](tupledArg[1])]));
+     },_web_application_client_side_core["v'blog"]()))])),Html.Div(List.ofArray([Attr.Class("navbar-collapse collapse")]),List.ofArray([Html.Div(List.ofArray([Attr.Class("navbar-collapse collapse")]),List.ofArray([Html.Div(List.ofArray([Attr.Class("pull-right")]),List.ofArray([Html.Div(List.ofArray([Attr.Class("nav")]),List.ofArray([Html.UL(List.ofArray([Attr.Class("nav navbar-nav sm sm-collapsible")]),List.ofArray([Html.LI0(List.ofArray([Doc.Input(attrs,_web_application_client_side_core["var'context"]())]))])),Doc.EmbedView(View.Map(function()
      {
       _web_application_client_side_core["var'page'number"]().set_Value("0");
       return Doc.get_Empty();
-     },_web_application_client_side_core["var'context"]().get_View())),UINextUtils["Doc'Map"](_web_application_client_side_core["var'is'settings'visible"]().get_View(),f)]));
-     x=Html.Div0(List.ofArray([((NewPostUI.on())(Doc.get_Empty()))(x1),Doc.EmbedView(View.Map(function(tupledArg)
+     },_web_application_client_side_core["var'context"]().get_View())),Doc.EmbedView(View.Map(function(tupledArg)
+     {
+      return _web_application_client_side_core["doc'nav'right"](tupledArg[1]);
+     },_web_application_client_side_core["v'blog"]())),UINextUtils["Doc'Map"](_web_application_client_side_core["var'is'settings'visible"]().get_View(),f)]))]))]))]))]));
+     x=Html.Div(List.ofArray([Attr.Class("container")]),List.ofArray([((NewPostUI.on())(Doc.get_Empty()))(x1),Doc.EmbedView(View.Map(function(tupledArg)
      {
       var blog,docBlog;
       blog=tupledArg[0];
@@ -30,7 +36,7 @@
       {
        return PostUI.doc(blog,post);
       },ListModel1.View(blog.Posts));
-      return((NewPostUI.on())(NewPostUI.doc(blog)))(Html.UL0(List.ofArray([docBlog])));
+      return((NewPostUI.on())(NewPostUI.doc(blog)))(Html.UL(List.ofArray([Attr.Class("ul-top-blog")]),List.ofArray([docBlog])));
      },_web_application_client_side_core["v'blog"]()))]));
      return((LoginUI["on'visible"]())(LoginUI["doc'logining"]()))(x);
     },
@@ -46,7 +52,7 @@
       {
        var _is_current,s,arg10,arg20;
        _is_current=n===nav.PageNum;
-       s=n===0?"Beginning":n===lastPageIndex?"End "+Global.String(n+1):"Page "+Global.String(n+1);
+       s=n===0?"Page "+Global.String(n+1):n===lastPageIndex?"End "+Global.String(n+1):"Page "+Global.String(n+1);
        arg10=Seq.toList(Seq.delay(function()
        {
         return _is_current?[Attr.Class("current-page-button")]:Seq.empty();
@@ -68,22 +74,26 @@
       }));
       return List.map(_page_link,list);
      },
-     "doc'nav":function(nav)
+     "doc'nav'left":function()
      {
-      return Html.UL0(Seq.toList(Seq.delay(function()
+      return Html.Div(List.ofArray([Attr.Class("navbar-collapse collapse")]),List.ofArray([Html.UL(List.ofArray([Attr.Class("nav navbar-nav sm")]),Seq.toList(Seq.delay(function()
       {
-       return Seq.append([Html.LI0(List.ofArray([LoginUI.button()]))],Seq.delay(function()
+       return[Html.LI0(List.ofArray([((LoginUI["is'logged'in"]())(NewPostUI.button()))(Doc.get_Empty())]))];
+      })))]));
+     },
+     "doc'nav'right":function()
+     {
+      return Html.UL(List.ofArray([Attr.Class("nav navbar-nav sm sm-collapsible")]),Seq.toList(Seq.delay(function()
+      {
+       var arg10,arg20;
+       arg10=List.ofArray([Attr.Class("mainsettingsbtn")]);
+       arg20=function()
        {
-        return Seq.append([Html.LI0(List.ofArray([((LoginUI["is'logged'in"]())(NewPostUI.button()))(Doc.get_Empty())]))],Seq.delay(function()
-        {
-         return Seq.append(_web_application_client_side_core["b'nav"](nav),Seq.delay(function()
-         {
-          return[Html.LI0(List.ofArray([(UINextUtils.button0("Settings"))(function()
-          {
-           return _web_application_client_side_core["var'is'settings'visible"]().set_Value(true);
-          })]))];
-         }));
-        }));
+        return _web_application_client_side_core["var'is'settings'visible"]().set_Value(true);
+       };
+       return Seq.append([Html.LI0(List.ofArray([Doc.Button("Settings",arg10,arg20)]))],Seq.delay(function()
+       {
+        return[Html.LI0(List.ofArray([LoginUI.button()]))];
        }));
       })));
      },
@@ -450,14 +460,19 @@
     "private members":{
      "button'login":Runtime.Field(function()
      {
-      return(UINextUtils.button0("Login"))(function()
+      var arg10,arg20;
+      arg10=List.ofArray([Attr.Class("btnlogin")]);
+      arg20=function()
       {
        return _private_members["go'to'logining"]();
-      });
+      };
+      return Doc.Button("",arg10,arg20);
      }),
      "button'logout":Runtime.Field(function()
      {
-      return(UINextUtils.button0("Logout"))(function()
+      var arg10,arg20;
+      arg10=List.ofArray([Attr.Class("btnlogout")]);
+      arg20=function()
       {
        var arg00;
        arg00=Concurrency.Delay(function()
@@ -471,7 +486,8 @@
        return Concurrency.Start(arg00,{
         $:0
        });
-      });
+      };
+      return Doc.Button("",arg10,arg20);
      }),
      "go'to'logining":function()
      {
@@ -691,7 +707,7 @@
      arg10="post-"+Global.String(post.Id)+"-article";
      arg00=List.ofArray([Attr.Style("width","100%")]);
      arg101=post.EditedTitle;
-     return Html.LI(List.ofArray([Attr.Create("id",arg10)]),List.ofArray([_private_members2["doc'header"](blog,post),_private_members2["on'edit"](post,Html.Div0(List.ofArray([Html.P0(List.ofArray([UINextUtils.txt("Title"),Doc.Input(arg00,arg101)])),Html.P0(List.ofArray([UINextUtils.txt("Content"),UINextUtils["doc'edit'content'input'area"](post.EditedContent)]))])),_private_members2["doc'static'content"](post))]));
+     return Html.Div(List.ofArray([Attr.Class("panel panel-primary"),Attr.Create("id",arg10)]),List.ofArray([_private_members2["doc'header"](blog,post),_private_members2["on'edit"](post,Html.Div0(List.ofArray([Html.P0(List.ofArray([UINextUtils.txt("Title"),Doc.Input(arg00,arg101)])),Html.P0(List.ofArray([UINextUtils.txt("Content"),UINextUtils["doc'edit'content'input'area"](post.EditedContent)]))])),_private_members2["doc'static'content"](post))]));
     },
     "private members":{
      "doc'crud":function(blog,post)
@@ -718,13 +734,7 @@
      },
      "doc'header":function(blog,post)
      {
-      var view,f;
-      view=post.Num.get_View();
-      f=function(n)
-      {
-       return UINextUtils.txt(Global.String(n));
-      };
-      return Html.Div(List.ofArray([Attr.Class("post-header-block")]),List.ofArray([Html.Div(List.ofArray([Attr.Class("post-title-text-block")]),List.ofArray([Doc.TextView(post.Title.get_View())])),_private_members2["doc'crud"](blog,post),UINextUtils.txt("Num "),UINextUtils["Doc'Map"](view,f),_private_members2["doc'date"](post)]));
+      return Html.Div(List.ofArray([Attr.Class("panel-heading")]),List.ofArray([Doc.TextView(post.Title.get_View())]));
      },
      "doc'static'content":function(post)
      {
@@ -733,7 +743,7 @@
       f=function(content)
       {
        var htmlElem,_,matchValue;
-       htmlElem=jQuery("<div class=\"post-content-block\">"+content+"</div>").get(0);
+       htmlElem=jQuery("<div class=\"panel-body\">"+content+"</div>").get(0);
        try
        {
         _=Doc.Static(htmlElem);
@@ -744,7 +754,7 @@
        }
        return _;
       };
-      return Html.Div0(List.ofArray([UINextUtils["Doc'Map"](view,f)]));
+      return UINextUtils["Doc'Map"](view,f);
      },
      "on'edit":function(post,_doc_edit,doc)
      {
@@ -850,8 +860,10 @@
  {
   UI=Runtime.Safe(Global.WebSharper.UI);
   Next=Runtime.Safe(UI.Next);
-  Html=Runtime.Safe(Next.Html);
+  Attr=Runtime.Safe(Next.Attr);
+  Seq=Runtime.Safe(Global.WebSharper.Seq);
   List=Runtime.Safe(Global.WebSharper.List);
+  Html=Runtime.Safe(Next.Html);
   Doc=Runtime.Safe(Next.Doc);
   View=Runtime.Safe(Next.View);
   WsNote=Runtime.Safe(Global.WsNote);
@@ -863,8 +875,6 @@
   ListModel1=Runtime.Safe(Next.ListModel1);
   LoginUI=Runtime.Safe(WsNote.LoginUI);
   Operators=Runtime.Safe(Global.WebSharper.Operators);
-  Seq=Runtime.Safe(Global.WebSharper.Seq);
-  Attr=Runtime.Safe(Next.Attr);
   String=Runtime.Safe(Global.String);
   T=Runtime.Safe(List.T);
   Concurrency=Runtime.Safe(Global.WebSharper.Concurrency);

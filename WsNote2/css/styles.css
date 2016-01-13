@@ -6,7 +6,7 @@
 body {
 	line-height: 1;
     margin: 20px;
-    background:#e9f3f6;
+    /*background:#e9f3f6;*/
     /*background:#eee;*/
 	font: 16px/24px Helvetica, sans-serif;
 	
@@ -37,6 +37,9 @@ nav ul li{
     display:inline;    
 }
 
+.navbar-fixed-top {
+    padding-top: 10px;    
+}
 nav ul li button {
      min-width:80px;
      margin : 5px 5px 0 0;
@@ -82,7 +85,9 @@ nav ul li:hover button {
     {
         margin-left:50px;
     }
-
+.ul-top-blog {
+    margin-top: 60px;
+}
 .post-date-block {
     text-align: right;
 }
@@ -112,3 +117,45 @@ nav ul li:hover button {
 }
 
 
+@media (min-width: 1200px) {
+    .container {
+        width: 100%;
+        padding-left: 10px;
+    }
+    .ngscope {
+        padding: 0px;
+    }
+}
+
+.btnlogout {
+    background: url("logoutbtn.jpg") no-repeat;
+    width: 90px;
+    height: 32px;
+    margin-left: 5px;
+}
+.btnlogin {
+    background: url("loginbtn.jpg") no-repeat;
+    width: 90px;
+    height: 32px;
+}
+
+.mainsearch {
+    padding: 2px;
+}
+
+.mainsettingsbtn {
+    padding: 2px;
+}
+
+@media (min-width: 768px) {
+    .container {
+        width: 100%;
+        padding-left: 10px;
+    }
+    .ngscope {
+        padding: 0px;
+    }
+   .col-sm-12 {
+       padding: 0px;
+   }
+}

@@ -68,13 +68,13 @@ module LoginUI =
             |> Async.Start              
 
         let button'logout = 
-            button0 "Logout"  <| fun () -> 
+            Doc.Button "" [Attr.Class "btnlogout"]  <| fun () -> 
                 async{
                     do! Protect.logout()
                     var'is'logged'in.Value <- false }
                 |> Async.Start      
 
-        let button'login = button0 "Login" go'to'logining
+        let button'login = Doc.Button "" [Attr.Class "btnlogin"] go'to'logining
 
     let set'logged'in = Var.Set var'is'logged'in
 
@@ -85,6 +85,7 @@ module LoginUI =
     let protect doc = is'logged'in doc Doc.Empty
 
     let button = is'logged'in button'logout button'login
+
 
     let doc'logining = 
         

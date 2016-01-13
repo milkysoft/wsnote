@@ -29,6 +29,7 @@ module UINextUtils =
 
     let button0 txt = Doc.Button txt []
 
+
     let doc'on'off var doc'yes doc'no = 
             Doc'Map (View.FromVar var) <| function
                 | false -> doc'no
