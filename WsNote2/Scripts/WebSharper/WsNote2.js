@@ -1,6 +1,6 @@
 (function()
 {
- var Global=this,Runtime=this.IntelliFactory.Runtime,UI,Next,Attr,Seq,List,Html,Doc,View,WsNote,BlogUI,_web_application_client_side_core,UINextUtils,NewPostUI,PostUI,ListModel1,LoginUI,Operators,String,T,Concurrency,ClientBlogData,Var,_______________________________________________________________________,Control,MailboxProcessor,Remoting,AjaxRemotingProvider,Collections,ResizeArray,ResizeArrayProxy,ListModel,Number,ClientUtils,_private_members,window,PrintfHelpers,console,_private_members1,_private_members2,jQuery,View1;
+ var Global=this,Runtime=this.IntelliFactory.Runtime,UI,Next,Attr,Seq,List,WsNote,LoginUI,Html,Doc,View,BlogUI,_web_application_client_side_core,UINextUtils,NewPostUI,PostUI,ListModel1,Operators,String,T,Concurrency,ClientBlogData,Var,_______________________________________________________________________,Control,MailboxProcessor,Remoting,AjaxRemotingProvider,Collections,ResizeArray,ResizeArrayProxy,ListModel,Number,ClientUtils,_private_members,console,window,PrintfHelpers,_private_members1,_private_members2,jQuery,View1;
  Runtime.Define(Global,{
   WsNote:{
    BlogUI:{
@@ -10,6 +10,7 @@
      _attr_my1=Attr.Create("placeholder","Search");
      _attr_my2=Attr.Class("mainsearch");
      attrs=Seq.append([_attr_my1],List.ofArray([_attr_my2]));
+     LoginUI.login();
      f=function(_arg1)
      {
       return _arg1?_web_application_client_side_core["doc'settings"]():Doc.get_Empty();
@@ -99,19 +100,19 @@
      },
      "doc'settings":Runtime.Field(function()
      {
-      var arg10,arg101,arg20;
-      arg10=function(_arg00_)
+      var _arg10_79_4,_arg10_86_5,_arg20_86_1;
+      _arg10_79_4=function(_arg00_)
       {
        return _web_application_client_side_core.hide(_arg00_);
       };
-      arg101=Runtime.New(T,{
+      _arg10_86_5=Runtime.New(T,{
        $:0
       });
-      arg20=function(_arg00_)
+      _arg20_86_1=function(_arg00_)
       {
        return _web_application_client_side_core.hide(_arg00_);
       };
-      return Html.Div(List.ofArray([Attr.Class("b-popup")]),List.ofArray([Html.Div(List.ofArray([Attr.Class("b-popup-content"),Attr.Handler("blur",arg10)]),List.ofArray([Html.Table0(List.ofArray([Html.TR0(List.ofArray([Html.TD0(List.ofArray([UINextUtils.txt("Stories count on one page")])),Html.TD0(List.ofArray([(UINextUtils.input0())(_web_application_client_side_core["var'posts'count"]())]))])),Html.TR0(List.ofArray([Html.TD(List.ofArray([Attr.Create("colspan","2"),Attr.Style("text-align","right")]),List.ofArray([Doc.Button("Close",arg101,arg20)]))]))]))]))]));
+      return Html.Div(List.ofArray([Attr.Class("b-popup")]),List.ofArray([Html.Div(List.ofArray([Attr.Class("b-popup-content"),Attr.Handler("blur",_arg10_79_4)]),List.ofArray([Html.Table0(List.ofArray([Html.TR0(List.ofArray([Html.TD0(List.ofArray([UINextUtils.txt("Stories count on one page")])),Html.TD0(List.ofArray([(UINextUtils.input0())(_web_application_client_side_core["var'posts'count"]())]))])),Html.TR0(List.ofArray([Html.TD(List.ofArray([Attr.Create("colspan","2"),Attr.Style("text-align","right")]),List.ofArray([Doc.Button("Close",_arg10_86_5,_arg20_86_1)]))]))]))]))]));
      }),
      hide:function()
      {
@@ -119,19 +120,19 @@
      },
      "v'blog":Runtime.Field(function()
      {
-      var _builder_,x,arg00;
-      _builder_=View.get_Do();
-      x=_builder_.Bind(UINextUtils.op_LessMultiplyGreater(UINextUtils["var'str'to'int"](0).get_View(),_web_application_client_side_core["var'page'number"]().get_View()),function(_arg1)
+      var _builder_89_1,x,_arg00_97_3;
+      _builder_89_1=View.get_Do();
+      x=_builder_89_1.Bind(UINextUtils.op_LessMultiplyGreater(UINextUtils["var'str'to'int"](0).get_View(),_web_application_client_side_core["var'page'number"]().get_View()),function(_arg1)
       {
-       return _builder_.Bind(UINextUtils.op_LessMultiplyGreater(UINextUtils["var'str'to'int"](10).get_View(),_web_application_client_side_core["var'posts'count"]().get_View()),function(_arg2)
+       return _builder_89_1.Bind(UINextUtils.op_LessMultiplyGreater(UINextUtils["var'str'to'int"](10).get_View(),_web_application_client_side_core["var'posts'count"]().get_View()),function(_arg2)
        {
-        return _builder_.Bind(_web_application_client_side_core["var'context"]().get_View(),function(_arg3)
+        return _builder_89_1.Bind(_web_application_client_side_core["var'context"]().get_View(),function(_arg3)
         {
-         return _builder_.Return([_arg1,_arg2,_arg3]);
+         return _builder_89_1.Return([_arg1,_arg2,_arg3]);
         });
        });
       });
-      arg00=function(tupledArg)
+      _arg00_97_3=function(tupledArg)
       {
        var _page_number,_posts_count,context;
        _page_number=tupledArg[0];
@@ -149,7 +150,7 @@
         });
        });
       };
-      return View.MapAsync(arg00,x);
+      return View.MapAsync(_arg00_97_3,x);
      }),
      "var'context":Runtime.Field(function()
      {
@@ -394,8 +395,8 @@
     }),
     "doc'logining":Runtime.Field(function()
     {
-     var arg00,arg10,view,f,view1,f1;
-     arg00=Runtime.New(T,{
+     var _arg00_138_4,arg10,view,f,view1,f1;
+     _arg00_138_4=Runtime.New(T,{
       $:0
      });
      arg10=_private_members["var'pass"]();
@@ -404,7 +405,7 @@
      {
       return _arg1?UINextUtils.txt("Logining to website..."):(UINextUtils.button0("Login"))(function()
       {
-       return _private_members.login();
+       return LoginUI.login();
       });
      };
      view1=_private_members["var'error"]().get_View();
@@ -422,19 +423,19 @@
        }
       return _;
      };
-     return Html.Div0(List.ofArray([Html.H10(List.ofArray([UINextUtils.txt("Sign in")])),Html.Table0(List.ofArray([Html.TR0(List.ofArray([Html.TD0(List.ofArray([UINextUtils.txt("User name")])),Html.TD0(List.ofArray([(UINextUtils.input0())(_private_members["var'user"]())]))])),Html.TR0(List.ofArray([Html.TD0(List.ofArray([UINextUtils.txt("Password")])),Html.TD0(List.ofArray([Doc.PasswordBox(arg00,arg10)]))]))])),Html.P0(List.ofArray([UINextUtils["Doc'Map"](view,f),(UINextUtils.button0("Cancel"))(function()
+     return Html.Div0(List.ofArray([Html.H10(List.ofArray([UINextUtils.txt("Sign in")])),Html.Table0(List.ofArray([Html.TR0(List.ofArray([Html.TD0(List.ofArray([UINextUtils.txt("User name")])),Html.TD0(List.ofArray([(UINextUtils.input0())(_private_members["var'user"]())]))])),Html.TR0(List.ofArray([Html.TD0(List.ofArray([UINextUtils.txt("Password")])),Html.TD0(List.ofArray([Doc.PasswordBox(_arg00_138_4,arg10)]))]))])),Html.P0(List.ofArray([UINextUtils["Doc'Map"](view,f),(UINextUtils.button0("Cancel"))(function()
      {
-      var x,arg001,x1,arg002;
+      var x,arg00,x1,arg001;
       _private_members["var'is'visible"]().set_Value(false);
       _private_members["var'error"]().set_Value({
        $:0
       });
       x=_private_members.op_SpliceUntyped(_private_members["key'user"]());
-      arg001=_private_members["var'user"]();
-      Var.Set(arg001,x);
+      arg00=_private_members["var'user"]();
+      Var.Set(arg00,x);
       x1=_private_members.op_SpliceUntyped(_private_members["key'pass"]());
-      arg002=_private_members["var'pass"]();
-      return Var.Set(arg002,x1);
+      arg001=_private_members["var'pass"]();
+      return Var.Set(arg001,x1);
      })])),UINextUtils["Doc'Map"](view1,f1)]));
     }),
     "is'logged'in":Runtime.Field(function()
@@ -443,10 +444,52 @@
      {
       return function(_doc_no)
       {
-       return UINextUtils["doc'on'off"](_private_members["var'is'logged'in"](),_doc_yes,_doc_no);
+       return UINextUtils["doc'on'off"](LoginUI["var'is'logged'in"](),_doc_yes,_doc_no);
       };
      };
     }),
+    login:function()
+    {
+     var arg00;
+     arg00=Concurrency.Delay(function()
+     {
+      var x;
+      _private_members["var'is'loginign'process"]().set_Value(true);
+      x=AjaxRemotingProvider.Async("WsNote2:6",[_private_members["var'user"]().get_Value(),_private_members["var'pass"]().get_Value()]);
+      return Concurrency.Bind(x,function(_arg1)
+      {
+       var _,a,a1;
+       _private_members["var'is'loginign'process"]().set_Value(false);
+       if(_arg1)
+        {
+         _private_members["var'is'visible"]().set_Value(false);
+         _private_members.op_LessEqualsEquals(_private_members["key'user"](),_private_members["var'user"]().get_Value());
+         _private_members.op_LessEqualsEquals(_private_members["key'pass"](),_private_members["var'pass"]().get_Value());
+         LoginUI["var'is'logged'in"]().set_Value(true);
+         _private_members["var'error"]().set_Value({
+          $:0
+         });
+         a="Successfull login, username: "+_private_members["var'user"]().get_Value();
+         console?console.log(a):undefined;
+         _=Concurrency.Return(null);
+        }
+       else
+        {
+         _private_members["var'error"]().set_Value({
+          $:1,
+          $0:"Username or password incorrect"
+         });
+         a1="Error login, username: "+_private_members["var'user"]().get_Value();
+         console?console.log(a1):undefined;
+         _=Concurrency.Return(null);
+        }
+       return _;
+      });
+     });
+     return Concurrency.Start(arg00,{
+      $:0
+     });
+    },
     "on'visible":Runtime.Field(function()
     {
      return function(_doc_yes)
@@ -460,26 +503,26 @@
     "private members":{
      "button'login":Runtime.Field(function()
      {
-      var arg10,arg20;
-      arg10=List.ofArray([Attr.Class("btnlogin")]);
+      var _arg10_96_6,arg20;
+      _arg10_96_6=List.ofArray([Attr.Class("btnlogin")]);
       arg20=function()
       {
        return _private_members["go'to'logining"]();
       };
-      return Doc.Button("",arg10,arg20);
+      return Doc.Button("",_arg10_96_6,arg20);
      }),
      "button'logout":Runtime.Field(function()
      {
-      var arg10,arg20;
-      arg10=List.ofArray([Attr.Class("btnlogout")]);
-      arg20=function()
+      var _arg10_90_7,_arg20_90_2;
+      _arg10_90_7=List.ofArray([Attr.Class("btnlogout")]);
+      _arg20_90_2=function()
       {
        var arg00;
        arg00=Concurrency.Delay(function()
        {
         return Concurrency.Bind(AjaxRemotingProvider.Async("WsNote2:7",[]),function()
         {
-         _private_members["var'is'logged'in"]().set_Value(false);
+         LoginUI["var'is'logged'in"]().set_Value(false);
          return Concurrency.Return(null);
         });
        });
@@ -487,7 +530,7 @@
         $:0
        });
       };
-      return Doc.Button("",arg10,arg20);
+      return Doc.Button("",_arg10_90_7,_arg20_90_2);
      }),
      "go'to'logining":function()
      {
@@ -508,44 +551,6 @@
      localStorage:function()
      {
       return window.localStorage;
-     },
-     login:function()
-     {
-      var arg00;
-      arg00=Concurrency.Delay(function()
-      {
-       var x;
-       _private_members["var'is'loginign'process"]().set_Value(true);
-       x=AjaxRemotingProvider.Async("WsNote2:6",[_private_members["var'user"]().get_Value(),_private_members["var'pass"]().get_Value()]);
-       return Concurrency.Bind(x,function(_arg1)
-       {
-        var _;
-        _private_members["var'is'loginign'process"]().set_Value(false);
-        if(_arg1)
-         {
-          _private_members["var'is'visible"]().set_Value(false);
-          _private_members.op_LessEqualsEquals(_private_members["key'user"](),_private_members["var'user"]().get_Value());
-          _private_members.op_LessEqualsEquals(_private_members["key'pass"](),_private_members["var'pass"]().get_Value());
-          _private_members["var'is'logged'in"]().set_Value(true);
-          _private_members["var'error"]().set_Value({
-           $:0
-          });
-          _=Concurrency.Return(null);
-         }
-        else
-         {
-          _private_members["var'error"]().set_Value({
-           $:1,
-           $0:"Username or password incorrect"
-          });
-          _=Concurrency.Return(null);
-         }
-        return _;
-       });
-      });
-      return Concurrency.Start(arg00,{
-       $:0
-      });
      },
      op_LessEqualsEquals:function(k,v)
      {
@@ -602,15 +607,44 @@
       }
       return _;
      },
+     page:function(city)
+     {
+      var arg00,arg001,arg10,arg002;
+      arg00=function(_arg1)
+      {
+       return _arg1.$==0?Concurrency.Delay(function()
+       {
+        var _;
+        _=Var.Create(true);
+        LoginUI["var'is'logged'in"]=function()
+        {
+         return _;
+        };
+        return Concurrency.Return(null);
+       }):Concurrency.Delay(function()
+       {
+        var _;
+        _=Var.Create(true);
+        LoginUI["var'is'logged'in"]=function()
+        {
+         return _;
+        };
+        return Concurrency.Return(null);
+       });
+      };
+      arg001=function()
+      {
+       return Doc.get_Empty();
+      };
+      arg10=View.MapAsync(arg00,city);
+      arg002=View.Map(arg001,arg10);
+      return Doc.EmbedView(arg002);
+     },
      "var'error":Runtime.Field(function()
      {
       return Var.Create({
        $:0
       });
-     }),
-     "var'is'logged'in":Runtime.Field(function()
-     {
-      return Var.Create(false);
      }),
      "var'is'loginign'process":Runtime.Field(function()
      {
@@ -639,12 +673,16 @@
     },
     "set'logged'in":Runtime.Field(function()
     {
-     var arg00;
-     arg00=_private_members["var'is'logged'in"]();
+     var _arg00_118_5;
+     _arg00_118_5=LoginUI["var'is'logged'in"]();
      return function(arg10)
      {
-      return Var.Set(arg00,arg10);
+      return Var.Set(_arg00_118_5,arg10);
      };
+    }),
+    "var'is'logged'in":Runtime.Field(function()
+    {
+     return Var.Create(false);
     })
    },
    NewPostUI:{
@@ -816,13 +854,13 @@
     },
     input0:Runtime.Field(function()
     {
-     var arg00;
-     arg00=Runtime.New(T,{
+     var _arg00_28_6;
+     _arg00_28_6=Runtime.New(T,{
       $:0
      });
      return function(arg10)
      {
-      return Doc.Input(arg00,arg10);
+      return Doc.Input(_arg00_28_6,arg10);
      };
     }),
     op_LessMultiplyGreater:function(f,x)
@@ -863,17 +901,17 @@
   Attr=Runtime.Safe(Next.Attr);
   Seq=Runtime.Safe(Global.WebSharper.Seq);
   List=Runtime.Safe(Global.WebSharper.List);
+  WsNote=Runtime.Safe(Global.WsNote);
+  LoginUI=Runtime.Safe(WsNote.LoginUI);
   Html=Runtime.Safe(Next.Html);
   Doc=Runtime.Safe(Next.Doc);
   View=Runtime.Safe(Next.View);
-  WsNote=Runtime.Safe(Global.WsNote);
   BlogUI=Runtime.Safe(WsNote.BlogUI);
   _web_application_client_side_core=Runtime.Safe(BlogUI["web application client side core"]);
   UINextUtils=Runtime.Safe(WsNote.UINextUtils);
   NewPostUI=Runtime.Safe(WsNote.NewPostUI);
   PostUI=Runtime.Safe(WsNote.PostUI);
   ListModel1=Runtime.Safe(Next.ListModel1);
-  LoginUI=Runtime.Safe(WsNote.LoginUI);
   Operators=Runtime.Safe(Global.WebSharper.Operators);
   String=Runtime.Safe(Global.String);
   T=Runtime.Safe(List.T);
@@ -892,9 +930,9 @@
   Number=Runtime.Safe(Global.Number);
   ClientUtils=Runtime.Safe(WsNote.ClientUtils);
   _private_members=Runtime.Safe(LoginUI["private members"]);
+  console=Runtime.Safe(Global.console);
   window=Runtime.Safe(Global.window);
   PrintfHelpers=Runtime.Safe(Global.WebSharper.PrintfHelpers);
-  console=Runtime.Safe(Global.console);
   _private_members1=Runtime.Safe(NewPostUI["private members"]);
   _private_members2=Runtime.Safe(PostUI["private members"]);
   jQuery=Runtime.Safe(Global.jQuery);
@@ -908,12 +946,12 @@
   _private_members1["var'content"]();
   NewPostUI.on();
   NewPostUI.button();
+  LoginUI["var'is'logged'in"]();
   LoginUI["set'logged'in"]();
   _private_members["var'user"]();
   _private_members["var'pass"]();
   _private_members["var'is'visible"]();
   _private_members["var'is'loginign'process"]();
-  _private_members["var'is'logged'in"]();
   _private_members["var'error"]();
   _private_members["key'user"]();
   _private_members["key'pass"]();

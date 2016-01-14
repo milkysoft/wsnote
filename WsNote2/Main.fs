@@ -33,7 +33,7 @@ module Skin =
             
 
 module Site =
-    let HomePage = Skin.withTemplate "HomePage" <| fun ctx ->
+    let HomePage = Skin.withTemplate "Journal Manager" <| fun ctx ->
         [ Div [ClientSide <@ BlogUI.main() @>] ] 
 
        

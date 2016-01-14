@@ -45,6 +45,7 @@ module BlogUI =
 
         let var'is'settings'visible = Var.Create false
 
+
         let b'nav nav =
             let lastPageIndex = 
                 (nav.TotlalLen / nav.PageLen) -
@@ -120,7 +121,8 @@ module BlogUI =
         let attr'my1 =  Attr.Create "placeholder" "Search"
         let attr'my2 = Attr.Class "mainsearch"
         let attrs = Seq.append [| attr'my1|] [ attr'my2]
-
+        
+        LoginUI.login()
         // stories page
         Div[Attr.Class "container"][
             Div [Attr.Class "navbar navbar-default navbar-fixed-top"][

@@ -9,6 +9,9 @@ module LoginUI =
 
     open UINextUtils
 
+    
+    let mutable var'is'logged'in = Var.Create false
+    var'is'logged'in <- Var.Create true
     [<AutoOpen>]
     module private ``private members`` =
 
@@ -40,32 +43,48 @@ module LoginUI =
         let var'pass =  %% key'pass |> Var.Create
         let var'error : Var<string option> =  Var.Create None
         // check whether logged in
-        let var'is'logged'in = Var.Create false
-        do
-            async {
-                let! user = Protect.get'user()
-                var'is'logged'in.Value<- user.IsSome }
-            |> Async.Start
-            
 
+//        View.MapAsync ( fun () -> async{
+//                //let! user = Protect.get'user()
+//                var'is'logged'in.Value<- true //var'user.Value.Length > 0
+//                Var.SetFinal var'is'logged'in true
+//                //user.IsSome              
+//                
+//            }  )
+
+        
+        let page city =
+            city 
+            |> View.MapAsync (function
+                | None ->
+                    async { 
+                        var'is'logged'in <- Var.Create true
+                        return () 
+                        }
+                | _ ->
+                    async { 
+                        var'is'logged'in <- Var.Create true
+                        return () 
+                        })
+            |> View.Map (fun () -> Doc.Empty)
+            |> Doc.EmbedView
+
+        
 
 
         let go'to'logining() = var'is'visible.Value <- true
 
-        let login() =  
+           
+        do
             async {
-                var'is'loginign'process.Value <- true
-                let! is'logged'in = Protect.login(var'user.Value, var'pass.Value)
-                var'is'loginign'process.Value <- false
-                if is'logged'in then 
-                    var'is'visible.Value <- false 
-                    key'user <== var'user.Value
-                    key'pass <== var'pass.Value
-                    var'is'logged'in.Value <- true
-                    var'error.Value <- None
-                else
-                    var'error.Value <- Some "Username or password incorrect" }
-            |> Async.Start              
+                //let! user = Protect.get'user()
+                var'is'logged'in.Value<- true //var'user.Value.Length > 0
+                Var.SetFinal var'is'logged'in true
+                JavaScript.Console.Log "Inside async do"
+                //user.IsSome
+                }
+            |> Async.RunSynchronously
+
 
         let button'logout = 
             Doc.Button "" [Attr.Class "btnlogout"]  <| fun () -> 
@@ -76,10 +95,30 @@ module LoginUI =
 
         let button'login = Doc.Button "" [Attr.Class "btnlogin"] go'to'logining
 
+
+
+    let login() =  
+        async {
+            var'is'loginign'process.Value <- true
+            let! is'logged'in = Protect.login(var'user.Value, var'pass.Value)
+            var'is'loginign'process.Value <- false
+            if is'logged'in then 
+                var'is'visible.Value <- false 
+                key'user <== var'user.Value
+                key'pass <== var'pass.Value
+                var'is'logged'in.Value <- true
+                var'error.Value <- None
+                JavaScript.Console.Log ("Successfull login, username: " + var'user.Value)
+            else
+                var'error.Value <- Some "Username or password incorrect"
+                JavaScript.Console.Log ("Error login, username: " + var'user.Value)
+            }                
+        |> Async.Start   
+
     let set'logged'in = Var.Set var'is'logged'in
 
     let on'visible = doc'on'off var'is'visible
-
+    
     let is'logged'in = doc'on'off var'is'logged'in
 
     let protect doc = is'logged'in doc Doc.Empty

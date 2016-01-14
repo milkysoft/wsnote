@@ -187,3 +187,7 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+
+
+#Some files need not be uploaded for security reasons:
+WsNote2/Database.fs
