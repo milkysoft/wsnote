@@ -1,7 +1,7 @@
 ﻿// main UI module
 // var' -  UI Next reactive variables
 // v' - UI Next virtual views
-// b' - UI Next virtual element // элемент виртуальной разметки UI Next, произведённый от модели
+// b' - UI Next virtual element, derived from model
 
 
 
@@ -122,9 +122,11 @@ module BlogUI =
         let attr'my2 = Attr.Class "mainsearch"
         let attrs = Seq.append [| attr'my1|] [ attr'my2]
         
-        LoginUI.login()
+        //LoginUI.login()
+        
         // stories page
         Div[Attr.Class "container"][
+            LoginUI.zor |> Doc.EmbedView 
             Div [Attr.Class "navbar navbar-default navbar-fixed-top"][
                 Div [Attr.Class "navbar-header"][
                     v'blog 
@@ -167,9 +169,17 @@ module BlogUI =
                 let docBlog = 
                     ListModel.View blog.Posts 
                     |> Doc.ConvertBy (fun m -> m.Id) (PostUI.doc blog )                
-                NewPostUI.on 
-                    ( NewPostUI.doc blog)
-                    ( UL[Attr.Class "ul-top-blog"] [docBlog] )) 
+                
+//                NewPostUI.on 
+//                    ( NewPostUI.doc blog)
+//                    ( UL[Attr.Class "ul-top-blog"] [docBlog] )
+
+                ChangePostUI.on 
+                    ( ChangePostUI.doc blog)
+                    ( UL[Attr.Class "ul-top-blog"] [docBlog] )
+
+                
+            ) 
             |> Doc.EmbedView  
         ]
              

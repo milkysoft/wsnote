@@ -3,13 +3,22 @@
 open FSharp.Data
 open System
 open System.Data.SqlClient
-
+//open System.Web.Configuration
+//open FSharp.Configuration
 module Database = 
-    
+    //type Settings = AppSettings<"web.config">
+    //let connectionString = Settings.ConnectionStrings.FsMvcAppExample.ToString()
     module Sql = 
         [<Literal>]
-        let connectionString = """Data Source=zuoqinhp;Initial Catalog=BigData;User Id=zuoqin;Password=Qwerty123;MultipleActiveResultSets=True;"""
+
         
+        //let language = WebConfigurationManager.ConnectionStrings(0)
+        
+        let connectionString = 
+            """Data Source=.;Initial Catalog=BigData;User Id=zuoqin;Password=Qwerty123;MultipleActiveResultSets=True;"""
+
+        //let rootWebConfig = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("/MyWebSiteRoot")
+        //let connectionString = WebConfigurationManager.ConnectionStrings[0]
         type GetBlog = SqlCommandProvider<"SELECT * FROM Post" , connectionString>
 
         type DeletePost = SqlCommandProvider<"DELETE FROM Post WHERE Id=@id" , connectionString>

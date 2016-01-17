@@ -20,15 +20,15 @@ module ClientBlogData =
             EditedContent : Var<string>
             IsEditMode : Var<bool> }
 
-    // Модель блога
+    // Blog model
     type BlogModel = 
         {   Posts : ListModel<int,PostModel>
             TotalCount : Var<int>}
 
     [<AutoOpen>]
-    module private ``асинхронная работа с локальными моделями на аснове агентов и сообщений`` =
+    module private ``asynchronious work with local models based on agents and messages`` =
 
-        // преобразование удалённых данных поста в локальную модель поста
+        // transfer remote posts data into local post model
         let create'post (x:RemoteBlogData.Post) = 
             {   Id = x.Id
                 Title = Var.Create x.Title
@@ -40,17 +40,17 @@ module ClientBlogData =
                 EditedContent = Var.Create x.Content
                 IsEditMode = Var.Create false }
 
-        // изменить локальную модель поста в соответствии с удалёнными данными поста
+        // update local post model according to remote data
         let update'post (m:PostModel) (x:RemoteBlogData.Post) =             
             m.Title.Value       <- x.Title
             m.Content.Value     <- x.Content
             m.EditDate.Value    <- x.EditDate 
             m.Num.Value         <- x.Num
 
-        // асинхронные сообщения на клиенте для CRUD операций     
+        // asynchronious client messages for CRUD operations
         type CRUDBlogMessage = 
             | ReadBlog      of int * int *string * AsyncReplyChannel<BlogModel>
-            | UpdatePost    of PostModel
+            | UpdatePost    of BlogModel * PostModel
             | DeletePost    of BlogModel * int
             | AddPost       of BlogModel * string * string  
 
@@ -70,7 +70,7 @@ module ClientBlogData =
                         
                     reply.Reply blog
                         
-                | UpdatePost post -> 
+                | UpdatePost (blog, post) -> 
                     post.IsEditMode.Value <- false
                     let! x = RemoteBlogData.setPostContent post.Id post.EditedTitle.Value post.EditedContent.Value
                     post.Content.Value <- x.Content
@@ -96,6 +96,6 @@ module ClientBlogData =
 
     let delete'post blog post = (blog, post.Id) |> DeletePost |> crud.Post
 
-    let update'post post = post |> UpdatePost |> crud.Post
+    let update'post blog post = (blog, post ) |> UpdatePost |> crud.Post //post |> UpdatePost |> crud.Post
 
     let add'post blog title content  = (blog, title, content ) |> AddPost |> crud.Post

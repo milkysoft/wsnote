@@ -44,13 +44,22 @@ module LoginUI =
         let var'error : Var<string option> =  Var.Create None
         // check whether logged in
 
-//        View.MapAsync ( fun () -> async{
-//                //let! user = Protect.get'user()
-//                var'is'logged'in.Value<- true //var'user.Value.Length > 0
-//                Var.SetFinal var'is'logged'in true
-//                //user.IsSome              
-//                
-//            }  )
+//        let ParseCSV (data: string) =
+//            let all =
+//                data.Split [|'\r'; '\n'|]
+//                |> Array.filter (fun s -> s <> "")
+//            all.[1..]
+//            |> Seq.ofArray
+//
+//        let LoadFromCSV (url: string) =
+//            Async.FromContinuations (fun (ok, no, _) ->
+//                JQuery.JQuery.Get(url, obj (), fun (data, _, _) ->
+//                    ok (ParseCSV ("hkjhkjh")))
+//                |> ignore)
+//        let zor1 =
+//            View.MapAsync (fun () -> LoadFromCSV "AlphaFrequency.csv") (View.Const ())
+//            |> ignore
+
 
         
         let page city =
@@ -95,7 +104,19 @@ module LoginUI =
 
         let button'login = Doc.Button "" [Attr.Class "btnlogin"] go'to'logining
 
-
+    let zor =
+        var'user.View
+        |> View.MapAsync ( fun user  -> async {
+                //let! user = Protect.get'user()
+                var'is'logged'in.Value<- true //var'user.Value.Length > 0
+                Var.SetFinal var'is'logged'in true
+                //user.IsSome
+                JavaScript.Console.Log ("Successfull login, var'is'logged'in: " + var'is'logged'in.Value.ToString())
+                return Doc.Empty}
+            )
+        
+    
+    
 
     let login() =  
         async {

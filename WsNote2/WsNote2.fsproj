@@ -125,6 +125,7 @@
     <Compile Include="LoginUI.fs" />
     <Compile Include="PostUI.fs" />
     <Compile Include="NewPostUI.fs" />
+    <Compile Include="ChangePostUI.fs" />
     <Compile Include="BlogUI.fs" />
     <Compile Include="Main.fs" />
     <Content Include="Main.html" />
